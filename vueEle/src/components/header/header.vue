@@ -21,14 +21,14 @@
                     <span class="text">{{seller.supports[0].description}}</span>
                  </div>
             </div>
-            <div v-if="seller.supports" class="support-count">
+            <div v-if="seller.supports" class="support-count" @click="showDetal">
                 <span class="count">{{seller.supports.length}}</span>
                 <i class="icon-keyboard_arrow_right"></i>
             </div>
            
 
         </div>
-        <div class="bluetin-wrapper">
+        <div class="bluetin-wrapper" @click="showDetal">
             <span class="bulletin-title"></span>
             <span class="bulletin-text">{{seller.bulletin}}</span>
             <i class="icon-keyboard_arrow_right"></i>
@@ -50,6 +50,16 @@ export default {
         created(){  //与后台对应的no  0 1 2 3 4 5个类 
             this.classMap=['decrease','discount','special','invoice','guarantee']
         }
+    },
+    data(){
+      return{
+        detailShow:false
+      }
+    },
+    methods:{
+      showDetal(){
+        this.detailShow = true
+      }
     }
 }
 </script>
@@ -174,5 +184,5 @@ export default {
     width:100%
     height:100%
     overflow:auto//用hidden的话 当超过屏幕宽高会发生滚动
-
+    background:rgb(7,17,27,0.8)
 </style>
