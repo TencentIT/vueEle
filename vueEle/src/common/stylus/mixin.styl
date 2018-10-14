@@ -1,0 +1,15 @@
+border-1px($color)  //定义一个函数 因为用的多 直接写成一个函数
+  position:relative
+  &:after
+    display:block
+    position: absolute
+    width:100%
+    left 0
+    bottom 0
+    content:" "
+    border-top:1px solid $color
+    
+bg-image($url)
+  background-image:url($url+"@2x.png")
+  @media (-webkit-min-device-pixel-radio:3),(min-device-pixel-radio:3)
+    background-image:url($url+"@3x.png")
