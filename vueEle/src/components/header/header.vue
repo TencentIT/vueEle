@@ -47,14 +47,14 @@ export default {
         seller:{
             type:Object
         },
-        created(){  //与后台对应的no  0 1 2 3 4 5个类 
+        created(){  //  与后   台对应的no  0 1 2 3 4 5个类 
             this.classMap=['decrease','discount','special','invoice','guarantee']
         }
     },
     data(){
       return{
         detailShow:false
-      }
+      }   
     },
     methods:{
       showDetal(){

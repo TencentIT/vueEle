@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>阿甲商城购物车</title>
+  <link rel="stylesheet" href="css/base.css" tppabs="http://www.codeboy.com/css/base.css"/>
+  <link rel="stylesheet" href="css/cart.css" tppabs="http://www.codeboy.com/css/cart.css"/>
+</head>
+<body>
+<div class="header">
+  <div class="loading">
+    <img src="img/loading.gif" tppabs="http://www.codeboy.com/img/loading.gif" alt="页头加载中...">
+  </div>
+</div>
+<div class="modal" style="display:none">
+  <div class="modal_dialog">
+    <div class="modal_header">
+      删除提醒
+    </div>
+    <div class="modal_information">
+      <img src="img/model/model_img2.png" tppabs="http://www.codeboy.com/img/model/model_img2.png" alt=""/>
+      <span>确定删除您的这个宝贝吗？</span>
+    </div>
+    <div class="yes"><span>删除</span></div>
+    <div class="no"><span>不删除</span></div>
+  </div>
+</div>
+<div class="modalNo" style="display:none">
+  <div class="modal_dialog">
+    <div class="modal_header">
+      删除提示
+      <img src="img/model/model_img1.png" tppabs="http://www.codeboy.com/img/model/model_img1.png" alt="" class="rt close"/>
+    </div>
+    <div class="modal_information">
+      <img src="img/model/model_img2.png" tppabs="http://www.codeboy.com/img/model/model_img2.png" alt=""/>
+      <span>请选择商品</span>
+    </div>
+  </div>
+</div>
+<div class="big">
+  <form name="" action="" method="post">
+    <section id="section">
+      <div id="title">
+        <b>购物车</b>
+        <p>
+          已选<span class="total color">0</span>件商品<span class="interval"></span>合计(不含运费):<span
+          class="totalPrices color susum">0.00</span><span class="unit color">元</span>
+        </p>
+      </div>
+      <div id="box">
+        <div id="content_box">
+          <div class="imfor_top">
+            <div class="check_top">
+              <div class="all">
+                            <span class="normal">
+                                <img src="img/cart/product_normal.png" tppabs="http://www.codeboy.com/img/cart/product_normal.png" alt=""/>
+                            </span> <input type="hidden" name="" value="">全选
+              </div>
+            </div>
+            <div class="pudc_top">商品</div>
+            <div class="pices_top">单价(元)</div>
+            <div class="num_top">数量</div>
+            <div class="totle_top">金额</div>
+            <div class="del_top">操作</div>
+          </div>
+          <div id="content_box_body">
+            <div class="loading">
+              <img src="img/loading.gif" tppabs="http://www.codeboy.com/img/loading.gif" alt="购物车内容加载中...">
+            </div>
+            <!--<div class="imfor">
+            <div class="check">
+              <div class="Each">
+                            <span class="normal">
+                                <img src="img/cart/product_normal.png" alt=""/>
+                            </span>
+                <input type="hidden" name="" value="">
+              </div>
+            </div>
+            <div class="pudc">
+              <div class="pudc_information" id="pudcId3">
+                <img src="img/cart/product_simg1.png" class="lf"/>
+                <input type="hidden" name="" value="">
+                        <span class="des lf">
+                            <a href="product_details.html">联想(Lenovo)YOGA5 PRO 标配版电脑(i5-7200u 8G 512G SSD FHD IPS)银</a>
+                              <input type="hidden" name="" value="">
+                        </span>
+                <p class="col lf"><span>颜色：</span><span class="color_des">深空灰  <input type="hidden" name=""
+                                                                                      value=""></span></p>
+              </div>
+            </div>
+            <div class="pices">
+              <p class="pices_des">阿甲专享价</p>
+              <p class="pices_information"><b>￥</b><span>4888.00  <input type="hidden" name="" value=""></span></p>
+            </div>
+            <div class="num"><span class="reduc">&nbsp;-&nbsp;</span><input type="text" value="1"><span class="add">&nbsp;+&nbsp;</span>
+            </div>
+            <div class="totle">
+              <span>￥</span>
+              <span class="totle_information">4888.00</span>
+            </div>
+            <div class="del">
+              <a href="javascript:;" class="del_d">删除</a>
+            </div>
+          </div>-->
+          </div>
+        </div>
+        <div class="foot">
+          <div class="foot_check">
+            <div class="all">
+                        <span class="normal">
+                                <img src="img/cart/product_normal.png" tppabs="http://www.codeboy.com/img/cart/product_normal.png" alt=""/>
+                            </span> <input type="hidden" name="" value="">全选
+            </div>
+          </div>
+          <a href="javascript:;" class="foot_del">删除</a>
+          <!--<a href="javascript:;" class="foot_yr">移入收藏夹</a>-->
+          <div class="foot_qk">清空失效商品</div>
+          <div class="foot_cash" id="go-buy">去结算</div>
+          <div class="foot_tol"><span>合计(不含运费):</span><span class="foot_pices susumOne">0.00</span><span
+            class='foot_des'>元</span></div>
+          <div class="foot_selected">
+            已选<span class="totalOne color">0</span>件商品
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+  <div class="none" style="display: none; z-index: 999">
+    <div class="none_content">
+      <p class="lf">您的购物车竟然还是空哒( ⊙ o ⊙ )</p>
+      <span class="lf">赶快去下单吧！</span>
+      <a href="products.html" tppabs="http://www.codeboy.com/products.html" class="lf">去购物>></a>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="loading">
+    <img src="img/loading.gif" tppabs="http://www.codeboy.com/img/loading.gif" alt="页尾加载中...">
+  </div>
+</div>
+<script src="js/jquery-3.1.1.min.js" tppabs="http://www.codeboy.com/js/jquery-3.1.1.min.js"></script>
+<script src="js/slide.js" tppabs="http://www.codeboy.com/js/slide.js"></script>
+<script src="js/base.js" tppabs="http://www.codeboy.com/js/base.js"></script>
+<script src="js/cart.js" tppabs="http://www.codeboy.com/js/cart.js"></script>
+<script>
+  <!-- 显示空购物车页面-->
+  $(function () {
+    if (!$(".imfor")) {
+      $('#section').hide();
+      $('.none').show();
+    }
+  })
+</script>
+</body>
+</html>
