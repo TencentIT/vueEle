@@ -37,6 +37,8 @@
         <div class="background">
             <img :src="seller.avatar" alt="" width="100%" height="100%">
         </div>
+        <!-- 模糊弹层 通过v-show来控制显示隐藏 -->
+        <div class="detail" v-show="detailShow"></div>
     </div>
 </template>
 <script>
@@ -166,4 +168,11 @@ export default {
     left:0
     z-index:-1
     filter:blur(10px)
+  .detail
+    position:fixed
+    z-index:100
+    width:100%
+    height:100%
+    overflow:auto//用hidden的话 当超过屏幕宽高会发生滚动
+
 </style>
