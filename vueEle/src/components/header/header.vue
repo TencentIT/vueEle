@@ -38,7 +38,12 @@
             <img :src="seller.avatar" alt="" width="100%" height="100%">
         </div>
         <!-- 模糊弹层 通过v-show来控制显示隐藏 -->
-        <div class="detail" v-show="detailShow"></div>
+        <div class="detail" v-show="detailShow">
+          <div class="detail-wrapper clearfix">
+            <div class="detail-main"></div>
+          </div>
+          <div class="detail-close"></div>
+        </div>
     </div>
 </template>
 <script>
@@ -185,4 +190,17 @@ export default {
     height:100%
     overflow:auto//用hidden的话 当超过屏幕宽高会发生滚动
     background:rgb(7,17,27,0.8)
+    .detail-wrapper // 这里是用css stickyfooter 布局 wrapper层最小高度100% 撑满屏幕
+      min-height:100%
+      .detail-main  //内容层底部留一个空间 不覆盖底部 给下面的X 留空间
+        margin-top:64px
+        padding-bottom:64px
+    .detail-close //和wrapper平级的 由于是-64px 往上移动
+      position:relative
+      width:32px
+      height:32px
+      margin:-64px auto 0 auto
+      clear:both
+      font-size:32px
+
 </style>
