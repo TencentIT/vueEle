@@ -42,8 +42,15 @@
           <div class="detail-wrapper clearfix">
             <div class="detail-main">
               <h1 class="name">{{seller.name}}</h1>
+              <!-- 星星 -->
               <div class="star-wrapper">
                 <star :size="48" :score="seller.score"></star>
+              </div>
+              <div class="title"> 
+                <!-- 下面三个用div不用span的原因 是因为span在某些安卓手机上存在写兼容问题 -->
+                <div class="line"></div>
+                <div class="text"></div>
+                <div class="line"></div>
               </div>
             </div>
           </div>
@@ -52,7 +59,7 @@
     </div>
 </template>
 <script>
-import star from "components/star/star.vue"
+import star from "components/star/star.vue" 
   export default {
     props:{
       seller:{
@@ -114,6 +121,23 @@ import star from "components/star/star.vue"
           color:rgb(255,255,255)
           font-weight:bold
           line-height :18px
+        .star-wrapper
+          margin-top:18px
+          padding:2px 0
+          text-align:center
+        .title
+          display:flex
+          width:80%
+          margin:30px auto 24px
+          .line
+            flex:1  //表示等分 即让文字两边的线自适应
+            position:relative
+            top:-6px
+            border-bottom:1px solid rgba(255,255,255,0.2)
+          .text
+            padding:0 12px
+            font-size:14px
+
       .description
         font-size:20px
         line-height :12px
@@ -205,10 +229,10 @@ import star from "components/star/star.vue"
         margin-top:64px
         padding-bottom:64px
         .name
-          line-height :16px
-          font-size :16px
-          text-align:center
-          font-weight:700
+          line-height :16px 
+          font-size :16px 
+          text-align:center 
+          font-weight:700 
     .detail-close //和wrapper平级的 由于是-64px 往上移动
       position:relative
       width:32px
