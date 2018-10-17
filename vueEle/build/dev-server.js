@@ -16,7 +16,6 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 
-// 引入data.json里面模拟的数据
 var appData = require('../data.json')
 var seller = appData.seller
 var goods = appData.goods
@@ -26,10 +25,9 @@ var apiRoutes = express.Router()
 
 apiRoutes.get('/seller', function (req, res) {
   res.json({
-    errno: 0, //返回给前端的状态码
+    errno: 0,
     data: seller
   });
-  
 })
 
 apiRoutes.get('/goods', function (req, res) {

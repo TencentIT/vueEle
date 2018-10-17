@@ -38,7 +38,7 @@
             <img :src="seller.avatar" alt="" width="100%" height="100%">
         </div>
         <!-- 模糊弹层 通过v-show来控制显示隐藏 -->
-        <div class="detail" v-show="detailShow">
+        <div class="detail" v-show="detailShow" transition="fade">
           <div class="detail-wrapper clearfix">
             <div class="detail-main">
               <h1 class="name">{{seller.name}}</h1>
@@ -49,7 +49,7 @@
               <div class="title"> 
                 <!-- 下面三个用div不用span的原因 是因为span在某些安卓手机上存在写兼容问题 -->
                 <div class="line"></div>
-                <div class="text"></div>
+                <div class="text">优惠信息</div>
                 <div class="line"></div>
               </div>
               <!-- 优惠信息下方ul -->
@@ -61,9 +61,22 @@
                   <span class="text">{{seller.supports[$index].description}}</span>
                 </li>
               </ul>
+              <!-- 商家公告 -->
+              <div class="title">   
+                <!-- 下面三个用div不用span的原因 是因为span在某些安卓手机上存在写兼容问题 -->
+                <div class="line"></div>
+                <div class="text">商家公告</div>
+                <div class="line"></div>
+              </div>
+              <!-- 下方文字 -->
+              <div class="bulletin">
+                <p class="content">{{seller.bulletin}}</p>
+              </div>
             </div>
           </div>
-          <div class="detail-close"></div>
+          <div class="detail-close" @click="hideDetail">
+            <i class="icon-close"></i>
+          </div>
         </div>
     </div>
 </template>
@@ -86,6 +99,9 @@ import star from "components/star/star.vue"
     methods:{
       showDetal(){
         this.detailShow = true
+      },
+      hideDetail(){
+        this.detailShow=false;
       }
     },
     components:{
@@ -176,6 +192,14 @@ import star from "components/star/star.vue"
               .text
                 line-height:16px
                 font-size:12px
+          .bulletin
+            width:80%
+            margin:0 auto
+            .content
+              padding:0 12px
+              line-height :24px
+              font-size:12px
+
       .description
         font-size:20px
         line-height :12px
@@ -261,6 +285,14 @@ import star from "components/star/star.vue"
     height:100%
     overflow:auto//用hidden的话 当超过屏幕宽高会发生滚动
     background:rgb(7,17,27,0.8)
+    transition :all 0.5s
+    backdrop-filter:blur(10px)
+    &.fade-transition
+      opacity:1
+      background:rgba(7,17,27,1)
+    &.fade-enter,&.fade-leave //opacity 从0->1 共0.5s
+      opacity:0
+      background:rgba(7,17,27,0)
     .detail-wrapper // 这里是用css stickyfooter 布局 wrapper层最小高度100% 撑满屏幕
       min-height:100%
       .detail-main  //内容层底部留一个空间 不覆盖底部 给下面的X 留空间
