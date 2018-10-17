@@ -40,21 +40,27 @@
         <!-- 模糊弹层 通过v-show来控制显示隐藏 -->
         <div class="detail" v-show="detailShow">
           <div class="detail-wrapper clearfix">
-            <div class="detail-main"></div>
+            <div class="detail-main">
+              <h1 class="name">{{seller.name}}</h1>
+              <div class="star-wrapper">
+                <star :size="48" :score="seller.score"></star>
+              </div>
+            </div>
           </div>
           <div class="detail-close"></div>
         </div>
     </div>
 </template>
 <script>
-export default {
+import star from "components/star/star.vue"
+  export default {
     props:{
-        seller:{
-            type:Object
-        },
-        created(){  //  与后   台对应的no  0 1 2 3 4 5个类 
-            this.classMap=['decrease','discount','special','invoice','guarantee']
-        }
+      seller:{
+          type:Object
+      },
+      created(){  //  与后   台对应的no  0 1 2 3 4 5个类 
+          this.classMap=['decrease','discount','special','invoice','guarantee']
+      }
     },
     data(){
       return{
@@ -65,8 +71,11 @@ export default {
       showDetal(){
         this.detailShow = true
       }
+    },
+    components:{
+      star
     }
-}
+  }
 </script>
 <style lang="stylus">
 @import "../../common/stylus/mixin.styl"
@@ -195,6 +204,11 @@ export default {
       .detail-main  //内容层底部留一个空间 不覆盖底部 给下面的X 留空间
         margin-top:64px
         padding-bottom:64px
+        .name
+          line-height :16px
+          font-size :16px
+          text-align:center
+          font-weight:700
     .detail-close //和wrapper平级的 由于是-64px 往上移动
       position:relative
       width:32px
