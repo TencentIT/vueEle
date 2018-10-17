@@ -52,6 +52,15 @@
                 <div class="text"></div>
                 <div class="line"></div>
               </div>
+              <!-- 优惠信息下方ul -->
+              <ul v-if="seller.supports"  class="supports"> 
+              <!-- 如果有的话就显示 不判断由于后台查数据是异步 会报undefined -->
+                <li class="support-item" v-for="item in seller.supports">
+                  <span class="icon" :class="classMap[seller.supports[$index].type]"></span>
+                  <!-- v-for 默认都有一个$index -->
+                  <span class="text">{{seller.supports[$index].description}}</span>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="detail-close"></div>
@@ -128,7 +137,7 @@ import star from "components/star/star.vue"
         .title
           display:flex
           width:80%
-          margin:30px auto 24px
+          margin:28px auto 24px
           .line
             flex:1  //表示等分 即让文字两边的线自适应
             position:relative
@@ -136,8 +145,37 @@ import star from "components/star/star.vue"
             border-bottom:1px solid rgba(255,255,255,0.2)
           .text
             padding:0 12px
-            font-size:14px
-
+            font-size:14:700
+          .supports
+            width:80%
+            margin:0 auto
+            .support-item
+              padding:0 12px
+              margin-bottom:12px
+              font-size:0
+              &.last-child
+                margin-bottom:0
+              .icon
+                display:inline-block
+                width:16px  
+                height:16px
+                vertical-align:top
+                margin-right:6px
+                background-size:16px 16px
+                background-repeat:no-repeat
+                &.decrease    /*真实项目中存在多种情况，所以把所有图片class都写了*/
+                  bg-image('decrease_2')
+                &.discount
+                  bg-image('discount_2')
+                &.invoice
+                  bg-image('invoice_2')
+                &.special
+                  bg-image('special_2')
+                &.guarantee
+                  bg-image('guarantee_2')
+              .text
+                line-height:16px
+                font-size:12px
       .description
         font-size:20px
         line-height :12px
