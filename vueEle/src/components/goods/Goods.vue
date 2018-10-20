@@ -14,7 +14,7 @@
      </div>
      <div class="foods-wrapper" ref="foodsWrapper">
        <ul>
-         <li v-for="item in goods" class="food-list"> 
+         <li v-for="item in goods" class="food-list food-list-hook"> 
            <h1 class="title">{{item.name}}</h1>
            <ul>
              <li v-for="food in item.foods" class="food-item border-1px">
@@ -47,8 +47,22 @@ const ERR_OK = 0;
 export default {
   data () {
     return {
-      goods: []
+      goods: [],
+      listHeight: [],
+      scrollY: 0
     };
+  },
+  computed: {
+    currentIndex() {
+      for (let i = 0; i < this.listHeight.length; i++) {
+        let height1 = this.listHeight[i];
+        let height2 = this.listHeight[i + 1];
+        if (!height2 || this.scrollY >= height1 && this.scrollY <= height2) {
+          return i;
+        }
+      }
+      return 0;
+    }
   },
   props: {
     seller: {
@@ -64,6 +78,7 @@ export default {
         this.goods = response.data;
         this.$nextTick(() => {
            this._initScroll();
+           this.$_calculateHeight();
         });
         // vue在更新数据的时候是异步的 vue里面有一个$nextTick 实际上是在$nextTick里面执行异步的更新
         // 为什么没有滑动呢 ？ 因为虽然改变了数据 但是DOM里面并没有变化 DOM没有变化 初始化计算高度的时候
@@ -73,11 +88,26 @@ export default {
     });
   },
   methods: {
-    _initScroll() {
-      this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
       // BScroll有两个参数 第一个是DOM对象 第二个是json
+    _initScroll() {
+      this.menuScroll = new BScroll(this.$refs.menuWrapper, {
 
-      this.foodsWrapper = new BScroll(this.$refs.foodsWrapper, {});
+      });
+      this.foodsWrapper = new BScroll(this.$refs.foodsWrapper, {
+        probeType: 3 // 作用： 实时记录滚动的位置 相当于探针的效果
+      });
+      this.foodsScroll.on('scroll', (pos) => {   // 监听滚动时间  pos 即实时的位置
+        this.scrollY = Math.abs(Math.round(pos.y));
+      });
+    },
+    _calculateHeight() {
+      let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
+      var height = 0;
+      for (var i = 0; i < foodList.length; i++) {
+        var item = foodList[i];
+        height += item.clientHeight;
+        this.listHeight.push(height);
+      }
     }
   }
 };
@@ -162,6 +192,7 @@ export default {
             line-height 10px
           .desc
             margin-bottom  8px
+            line-height 12px
           .extra
             font-size 10px
             color rgb(147,153,159)
