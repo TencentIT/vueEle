@@ -3,7 +3,7 @@
    <div class="goods">
      <div class="menu-wrapper" ref="menuWrapper">
        <ul>
-         <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex === index}">
+         <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex === index}" @click="selectMenu(index, $event)">
            <span class="text border-1px">
              <span  class="icon" :class="classMap[item.type]"></span>
               {{item.name}}
@@ -91,7 +91,7 @@ export default {
       // BScroll有两个参数 第一个是DOM对象 第二个是json
     _initScroll() {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
-
+        click: true // 因为better-scroll阻止了默认点击事件
       });
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
         click: true,
@@ -104,11 +104,18 @@ export default {
     _calculateHeight() {
       let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
       var height = 0;
+      this.listHeight.push(height); // 坑
       for (var i = 0; i < foodList.length; i++) {
         var item = foodList[i];
         height += item.clientHeight;
         this.listHeight.push(height);
       }
+    },
+    selectMenu(index, event) {
+      if (!event._constructed) {
+        return;
+      }
+      console.log(index);
     }
   }
 };
