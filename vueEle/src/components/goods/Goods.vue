@@ -115,7 +115,10 @@ export default {
       if (!event._constructed) {
         return;
       }
-      console.log(index);
+      // console.log(index);
+      let foodsList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
+      let el = foodsList[index];
+      this.foodsScroll.scrollToElement(el, 300);
     }
   }
 };
