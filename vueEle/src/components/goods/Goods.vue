@@ -3,7 +3,7 @@
    <div class="goods">
      <div class="menu-wrapper" ref="menuWrapper">
        <ul>
-         <li v-for="item in goods" class="menu-item">
+         <li v-for="item in goods" class="menu-item" :class="{'current'}:currentIndex===$index">
            <span class="text border-1px">
              <span  class="icon" :class="classMap[item.type]"></span>
               {{item.name}}
