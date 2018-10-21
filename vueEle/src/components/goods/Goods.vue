@@ -3,7 +3,7 @@
    <div class="goods">
      <div class="menu-wrapper" ref="menuWrapper">
        <ul>
-         <li v-for="item in goods" class="menu-item" :class="{'current'}:currentIndex===$index">
+         <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex === index}">
            <span class="text border-1px">
              <span  class="icon" :class="classMap[item.type]"></span>
               {{item.name}}
@@ -57,7 +57,7 @@ export default {
       for (let i = 0; i < this.listHeight.length; i++) {
         let height1 = this.listHeight[i];
         let height2 = this.listHeight[i + 1];
-        if (!height2 || this.scrollY >= height1 && this.scrollY <= height2) {
+        if (!height2 || this.scrollY >= height1 && this.scrollY < height2) {
           return i;
         }
       }
@@ -78,7 +78,7 @@ export default {
         this.goods = response.data;
         this.$nextTick(() => {
            this._initScroll();
-           this.$_calculateHeight();
+           this._calculateHeight();
         });
         // vue在更新数据的时候是异步的 vue里面有一个$nextTick 实际上是在$nextTick里面执行异步的更新
         // 为什么没有滑动呢 ？ 因为虽然改变了数据 但是DOM里面并没有变化 DOM没有变化 初始化计算高度的时候
@@ -93,7 +93,8 @@ export default {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
 
       });
-      this.foodsWrapper = new BScroll(this.$refs.foodsWrapper, {
+      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        click: true,
         probeType: 3 // 作用： 实时记录滚动的位置 相当于探针的效果
       });
       this.foodsScroll.on('scroll', (pos) => {   // 监听滚动时间  pos 即实时的位置
@@ -132,6 +133,14 @@ export default {
         line-height:14px
         padding:0 12px
         text-align center
+        &.current
+          position relative
+          margin-top  -1px
+          z-index 10
+          background #fff
+          font-weight 700
+          .text
+            broder-none()
         .icon
           display: inline-block
           vertical-align: top
