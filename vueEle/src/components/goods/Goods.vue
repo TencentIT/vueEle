@@ -33,7 +33,7 @@
                     <span v-show="food.oldPrice" class="old">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <cartcontrol :food="food"></cartcontrol>
+                    <cartcontrol @add="addFood" :food="food"></cartcontrol>
                   </div>
                 </div>
              </li>
@@ -136,6 +136,9 @@ export default {
       let foodsList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
       let el = foodsList[index];
       this.foodsScroll.scrollToElement(el, 300);
+    },
+    addFood(target) { // 从子组件cartcontrol 传递过来的
+      ...
     }
   },
   components: {
