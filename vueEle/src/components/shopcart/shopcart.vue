@@ -17,6 +17,14 @@
         </div> 
       </div>
     </div>
+    <div class="ball-container">
+      <transition name="drop">
+        <div class="ball" v-for="ball in balls" v-show="ball.show">
+          <div class="inner"></div>
+        </div>
+      </transition>
+     
+    </div>
   </div>
 </template>
 <script>
@@ -25,12 +33,24 @@ export default {
     selectFoods: {
       type: Array,  // 返回值类型是数组的话 default就要写成函数形式
       default() {
-        return [
-          {
-            price: 1,
-            count: 10
-          }
-        ];
+        return {
+          balls: [
+            {
+              show: false
+            },
+            {
+              show: false
+            },
+            {
+              show: false
+            },
+            {
+              show: false
+            }, {
+              show: false
+            }
+          ]
+        };
       }
     },
   data() {
