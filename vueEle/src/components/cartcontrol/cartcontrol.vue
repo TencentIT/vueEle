@@ -33,6 +33,7 @@ export default {
       } else {
         this.food.count++;
       }
+      this.$emit("add", event.target);  // 子组件给父组件传递数据 $emit()
     },
     decreaseCart(event) {
       if (!event._constructed) {

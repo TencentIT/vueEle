@@ -1,0 +1,118 @@
+远程连接设置
+云服务器》应用部署》远程连接》立即设置 中获得账号密码  
+账号：默认是root;  
+密码：可以自己设置、设置完后重启服务器就可以使用了
+宝塔面板安装
+远程连接》输入sudo su root（获取最高权限）回车 》根据自己的系统选择相应的安装命令进行安装 》安装成功得到宝塔面板登录账号和密码》默认登录端口IP：8888
+ Centos安装命令：
+  yum install -y wget && wget -O install.sh http://download.bt.cn/install/install.sh && sh install.sh
+
+  Ubuntu/Deepin安装命令：
+  wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && sudo bash install.sh
+
+  Debian安装命令：
+  wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && bash install.sh
+
+  Fedora安装命令：
+  wget -O install.sh http://download.bt.cn/install/install.sh && bash install.sh
+卸载命令
+/etc/init.d/bt stop && rm -f /etc/init.d/bt && rm -rf /www/server/panel
+宝塔中phpmyadmin 使用手册
+1.安装phpmyadmin
+2.开放端口888（服务器和宝塔面板内两个地方）
+2.升级PHP版本（PHP版本要高于phpmyadmin中PHP的版本）
+
+域名解析问题
+控制台》域名列表》找到相应域名点击后面的解析》进入解析设置》新手引导或自动添加（www和@）两个主机记录类型选A
+
+如何知道域名解析是否成功:
+操作步骤：
+1> 点击开始菜单，选择"运行" 
+2> 我们以检测"www.web-up.top"是否生效为例，输入"ping www.web-up.top -t "然后点击确定 
+3> 看反馈数据，若返回的ip地址为您需要绑定的ip地址(此例中为 39.105.52.19)，或者返回的别名解析是您要绑定的别名(此例中为www.web-up.top)，那么说明域名已经生效。
+解析成功之后添加一下站点才可以访问
+ipconfig/flushdns刷新本地DNS解析缓存
+
+部署node项目
+  工具：Xshell
+        Xftp
+        云服务器
+   操作过程：
+1.Xshell连接服务器：点击文件》新建》主机中输如云服务器的公网IP（输完之后不要直接点确定）》点击左侧用户身份验证输入服务器的链接账户和密码（此处的账号和密码为上文中远程连接中的账号密码）》点击确定
+连接成功提示：Welcome to Alibaba Cloud Elastic Compute Service !
+2.全局安装Node.js
+  (1)、wget命令下载Node.js安装包。
+该安装包是编译好的文件，解压之后，在bin文件夹中就已存在node和npm，无需重复编译。
+wget https://nodejs.org/dist/v6.9.5/node-v6.9.5-linux-x64.tar.xz
+(2)、解压文件。
+tar xvf node-v6.9.5-linux-x64.tar.xz
+(3)、软件默认安装在/root/node-v6.9.5-linux-x64/目录下。如果需要将该软件安装到其他目录（如：/opt/node/）下，请进行如下操作：
+mkdir -p /opt/node/
+mv /root/node-v6.9.5-linux-x64/* /opt/node/
+rm -f /usr/local/bin/node
+rm -f /usr/local/bin/npm
+ln -s /opt/node/bin/node /usr/local/bin/node
+ln -s /opt/node/bin/npm /usr/local/bin/npm
+
+(4)、查看node.js和npm版本：
+node -v
+npm -v
+3.安装mongodb（不知道有什么用，不知道设置成功没有） 
+           软件安装位置：/usr/local/mongodb?
+数据存放位置：/var/mongodb/data?
+日志存放位置：/var/mongodb/logs
+没找到
+          (1)、进入 /usr/local/：
+cd /usr/local
+(2)、安装mongodb：
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.4.5.tgz
+
+
+           (3)、解压安装包，并重命名文件夹为mongodb
+tar zxvf mongodb-linux-x86_64-3.4.5.tgz
+mv mongodb-linux-x86_64-3.4.5 mongodb
+(4)、创建数据和日志存放目录（没找到这个目录）
+mkdir /var/mongodb
+mkdir /var/mongodb/data
+mkdir /var/mongodb/logs
+        
+(5)、设置开机启动项
+                打开rc.local文件，添加CentOS开机启动项：
+                vim /etc/rc.d/rc.local
+                     打开文件后输入‘i’启用编辑。将mongodb启动命令追加到本文件中，让mongodb开机自启动：
+                  /opt/mongodb/bin/mongod --dbpath=/var/mongodb/data --logpath /var/mongodb/logs/log.log -fork
+                     退出liunx命令窗
+                     按?Esc?退出编辑，输入?:wq?(冒号wq)，回车保存并关闭文件。
+                  按完esc只有按：之后才能输入命令，直接输入其他字符无效（没反应）
+(6)、手动启动mongodb
+/opt/mongodb/bin/mongod --dbpath=/var/mongodb/data --logpath /var/mongodb/logs/log.log -fork
+
+ 4、安装pm2
+(1)、通过npm全局安装：
+npm install pm2 -g
+
+这个时候使用 pm2 -v 查看版本可能会报错，需要设置一下环境变量
+
+(2)、设置环境变量
+使用 vim 命令打开文件 /etc/profile
+
+vim /etc/profile
+同样，按‘i’启动编辑，将pm2的路径添加到环境变量中；
+PATH=$PATH:/opt/node/lib/node_modules/pm2/bin
+保存退出之后输入：source /etc/profile?可以让变量生效。
+5.使用Xftp上传文件
+选项》FTP》数据连接模式（被动模式）确定》会话》新建》输入连接信息确定（可以输如域名然后选择该域名绑定的站点名称和密码）远程路径可选》确定
+6.启动项目
+   控制台中使用cd命令进入存放代码的目录（如果一下切换不过去可以先返回根目录，可以放在任意目录下运行），和本地操作类似，本地使用node /bin/www?启动项目，这里换成pm2 start /bin/www?;
+   pm2查看运行状态status中显示online表示启动成功，显示errored表示启动失败
+   netstat-tpln可以查看运行服务的端口
+   kill 进程对应的PID可以关闭进程
+
+第一次成功之后再次运行只用使用连接到服务器然后cd 到文件所在目录，执行pm2 start app.js(文件名)
+    
+
+
+
+
+
+

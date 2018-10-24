@@ -138,7 +138,7 @@ export default {
       this.foodsScroll.scrollToElement(el, 300);
     },
     addFood(target) { // 从子组件cartcontrol 传递过来的
-      ...
+      // ...
     }
   },
   components: {
