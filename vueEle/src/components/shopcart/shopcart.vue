@@ -143,7 +143,7 @@
         }
         let show = !this.fold;
         if (show) {
-          this.$nextTick(() => {
+          this.$nextTick(() => {  // 异步的  DOM变化了 数据不一定变化
             if (!this.scroll) {
               this.scroll = new BScroll(this.$refs.listContent, {
                 click: true
@@ -389,7 +389,6 @@
             position: absolute
             right: 0
             bottom: 6px
-
   .list-mask
     position: fixed
     top: 0
