@@ -1,6 +1,6 @@
 <template>
   <transition name="move">
-    <div class="food" v-show="showFlag">
+    <div class="food" v-show="showFlag" ref="food">
     <div class="food-content">
       <div class="image-header">
         <img :src="food.image">
@@ -18,12 +18,18 @@
            <span class="now">￥{{food.price}}</span>
            <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
         </div>
+        <div class="cartcontrol-wrapper">
+          <cartcontrol></cartcontrol>
+        </div>
+        <div class="buy" v-show="!food.count || food.count===0"></div>
       </div>
     </div>
   </div>
   </transition>
 </template>
 <script>
+import BScroll from "better-scroll"
+import cartcontrol from "components/cartcontrol/cartcontrol"
 export default {
   props: {
     food: {
@@ -41,10 +47,20 @@ export default {
     },
     show() {
       this.showFlag = true;
+      if(!this.scroll){
+        this.scroll = new BScroll(this.$refs.food,{
+          click: true
+        })
+      }else {
+        this.scroll.refresh();
+      }
     }
   },
   created() {
     console.log(2, this.food);
+  },
+  components: {
+    cartcontrol
   }
 };
 </script>
@@ -113,4 +129,11 @@ export default {
         text-decoration: line-through
         font-size: 10px
         color: rgb(147, 153, 159)
+    .cartcontrol-wrapper
+      position absolute
+      right: 12px
+      bottom: 12px
+      border 1px solid red
+      width 20px 
+      height 30px
 </style>
