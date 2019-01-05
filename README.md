@@ -6,6 +6,16 @@
 
 ### 项目地址：http://39.105.101.78:8088
 
+### 运行
+
+####  git clone git@github.com:TencentIT/vueEle.git
+
+####  cd vueEle
+
+####  npm install
+
+####  npm start
+
 ### 功能：
 
 1.实现了基本的点餐功能，整个项目基于Vue.js实现。
